@@ -49,6 +49,9 @@ end)
     --MAIN
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Auto")
+
+
+    --AUTO SWING
     MainSection:NewToggle("Auto Swing", "Make your life easier", function(v)
         getgenv().autoswing = v
         while true do
@@ -65,6 +68,8 @@ end)
                 wait(0.1)
             end
     end)
+
+    --AUTO SELL
     MainSection:NewToggle("Auto Sell", "Auto Sell at best island", function(v)
         getgenv().autosell = v
         while true do
@@ -75,6 +80,9 @@ end)
             wait(0.1)
         end
     end)
+
+
+    --AUTO BUY SWORDS
     MainSection:NewToggle("Auto Buy Sword", "Auto Buy Sword", function(v)
         getgenv().autosword = v
         while true do
@@ -88,6 +96,8 @@ end)
     wait(0.1)            
         end
     end)
+
+    --AUTO BUY BELTS
     MainSection:NewToggle("Auto Buy Belts", "Auto Buy Belts", function(v)
         getgenv().autobelt = v
         while true do
@@ -101,6 +111,9 @@ end)
     wait(0.1)            
         end
     end)
+
+
+    --UNLOCK ALL ISLANDS
 MainSection:NewButton("Unlock all Islands", "Unlocks all the islands in game", function() 
     local oldcframe =  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
     for _,v in pairs(game:GetService("Workspace").islandUnlockParts:GetChildren()) do
@@ -109,23 +122,107 @@ MainSection:NewButton("Unlock all Islands", "Unlocks all the islands in game", f
     end
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = oldcframe
 end)
+
+
+
+--TELEPORT TO ISLAND
 MainSection:NewDropdown("Teleport To Island", "Teleport to a specific island", {"Inner Peace Island", "", "Option 3"}, function(currentOption)
     print(currentOption)
 end)
 
     local Info = Window:NewTab("Misc")
     local Infosection = Info:NewSection("Misc")
+
+
+    --KEYBIND
     Infosection:NewKeybind("Choose Keybind", "Keybind to toggle ui", Enum.KeyCode.F, function()
         Library:ToggleUI()
     end)
+
+    --WALKSPEED
     Infosection:NewSlider("WalkSpeed", "Changes Local Players walkspeed", 500, 16, function(v)
         game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
     end)
+
+
+
+
+    --JUMPPOWER
     Infosection:NewSlider("JumpPower", "Changes Local Players Jumppower", 10000, 50, function(v)
         game.Players.LocalPlayer.Character.Humanoid.JumpPower = v
     end)
+    Infosection:NewToggle("Anti Afk", "Just a Anti Afk", function(v)
+        getgenv().afk = v
+        while true do
+            repeat wait() until game:IsLoaded() 
+            game:GetService("Players").LocalPlayer.Idled:connect(function()
+            game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+        end)
+        end
+    end)
 end
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--NOT SUPPORTED
 if game.PlaceId ~= 3956818381 then
     local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
     local Window = Library.CreateLib("Not Supported Game", "DarkTheme")
